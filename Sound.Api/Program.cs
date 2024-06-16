@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Sound.Api.Models;
+using Sound.Api.Services;
 using Sound.Common;
 using Sound.Data.DbContexts;
 
@@ -12,7 +13,7 @@ namespace Sound.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddDataProtection();
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>
             {
@@ -22,6 +23,8 @@ namespace Sound.Api
                         .AllowAnyHeader()
                         .AllowAnyMethod());
             });
+
+            builder.Services.AddSingleton<TokenService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
