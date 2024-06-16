@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sound.Api", "Sound.Api\Sound.Api.csproj", "{DF276354-BF92-41A9-8CB6-6B7791BB679C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sound.Common", "Sound.Common\Sound.Common.csproj", "{DA7E4AE4-8244-40E7-B6B0-56BE5081D997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sound.Data", "Sound.Data\Sound.Data.csproj", "{E14E971B-E592-400E-84FE-25EB4633363A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{DF276354-BF92-41A9-8CB6-6B7791BB679C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF276354-BF92-41A9-8CB6-6B7791BB679C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF276354-BF92-41A9-8CB6-6B7791BB679C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7E4AE4-8244-40E7-B6B0-56BE5081D997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7E4AE4-8244-40E7-B6B0-56BE5081D997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7E4AE4-8244-40E7-B6B0-56BE5081D997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7E4AE4-8244-40E7-B6B0-56BE5081D997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14E971B-E592-400E-84FE-25EB4633363A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14E971B-E592-400E-84FE-25EB4633363A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14E971B-E592-400E-84FE-25EB4633363A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14E971B-E592-400E-84FE-25EB4633363A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
