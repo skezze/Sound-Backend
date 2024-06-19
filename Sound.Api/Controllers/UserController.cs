@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sound.Api.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace Sound.Api.Controllers
 {

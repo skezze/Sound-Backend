@@ -19,11 +19,12 @@ namespace Sound.Api.Controllers
         private readonly TokenService tokenService;
         private readonly IDataProtectionProvider dataProtectionProvider;
         private readonly UserManager<User> userManager;
-
+        
         public AudioFileController(SoundDbContext soundDbContext,
                                    TokenService tokenService,
                                    IDataProtectionProvider dataProtectionProvider,
-                                   UserManager<User> userManager)
+                                   UserManager<User> userManager
+                                   )
         {
             this.soundDbContext = soundDbContext;
             this.tokenService = tokenService;
@@ -44,7 +45,7 @@ namespace Sound.Api.Controllers
         {
             return Ok(await soundDbContext.AudioFiles.FirstOrDefaultAsync(x => x.Id == id));
         }
-
+        //todo: check token parser on this endpoint 
         [Route("get-custom-collections")]
         [HttpGet, Authorize]
         public async Task<IActionResult> GetCustomCollection()
