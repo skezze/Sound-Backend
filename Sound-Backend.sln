@@ -5,8 +5,7 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EB9C9D1-8743-449B-95C1-49C59A83A510}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\azure-webapps-dotnet-core.yml = .github\workflows\azure-webapps-dotnet-core.yml
-		docker-compose.yaml = docker-compose.yaml
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sound.Api", "Sound.Api\Sound.Api.csproj", "{DF276354-BF92-41A9-8CB6-6B7791BB679C}"
