@@ -2,9 +2,9 @@ name: Build & deploy .NET APP
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 env:
   sound_api_image: '${{ secrets.DOCKER_HUB_USERNAME }}/sound-api'
@@ -36,7 +36,7 @@ jobs:
       run: docker push ${{ env.sound_api_image }}
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: build
     environment:
