@@ -1,32 +1,21 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Sound.Api.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Sound.Data.Repositories.Interfaces;
 
 namespace Sound.Api.Controllers
 {
     [Controller, Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        public UserManager<User> UserManager { get; }
+        private readonly IUserRepository _userRepository;
 
-        public UserController(UserManager<User> userManager)
+        public UserController(IUserRepository userRepository)
         {
-            UserManager = userManager;
+            _userRepository = userRepository;
         }
         [HttpGet("get-users")]
-        public IActionResult GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            return Ok(UserManager.Users);
+            return Ok(await _userRepository.GetAllAsync());
         }
-
-    }
-    public class UserViewModel
-    {
-        public DateOnly BirthDate { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-
     }
 }

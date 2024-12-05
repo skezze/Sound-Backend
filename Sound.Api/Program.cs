@@ -1,9 +1,8 @@
 ﻿using Amazon.S3;
 using Microsoft.EntityFrameworkCore;
-using Sound.Api.Models;
-using Sound.Api.Services;
-using Sound.Common;
 using Sound.Data.DbContexts;
+using Sound.Data.Repositories;
+using Sound.Data.Repositories.Interfaces;
 
 namespace Sound.Api
 {
@@ -13,54 +12,50 @@ namespace Sound.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddDataProtection();
-
             builder.Services.AddControllers();
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder
-                        .WithOrigins(Configuration.AngularAppUrl)
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
-            });
-
-            builder.Services.AddSingleton<TokenService>();
             builder.Services.AddSingleton<IAmazonS3>(sp =>
             {
                 var config = new AmazonS3Config
                 {
-                    ServiceURL = "http://localhost:9000", // URL вашего MinIO сервера
+                    ServiceURL = "http://localhost:9000",
                     ForcePathStyle = true
                 };
                 return new AmazonS3Client("your-access-key", "your-secret-key", config);
             });
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+       
         builder.Services.AddEndpointsApiExplorer();
+        
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<SoundDbContext>(
-                            options => options.UseSqlServer(
+                            options => options.UseNpgsql(
                                 builder.Configuration.GetConnectionString("defaultConnection")));
 
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ISoundRepository, SoundRepository>();
+            builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            builder.Services.AddScoped<IUserSoundRepository, UserSoundRepository>();
+            builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
+            
             builder.Services.AddAuthorization();
-            builder.Services.AddIdentityApiEndpoints<User>()
-                            .AddEntityFrameworkStores<SoundDbContext>();
+            
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-           
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<SoundDbContext>();
+                db.Database.Migrate();
+            }
+            
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-            app.MapIdentityApi<User>();
-
             app.MapControllers();
-            app.UseCors("AllowSpecificOrigin");
 
             app.Run();
         }
